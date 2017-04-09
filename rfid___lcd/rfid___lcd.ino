@@ -13,9 +13,9 @@ unsigned long sernum[11] = {0, 2880452397, 2883834667, 1122397444, 3278950471, 0
 MFRC522 mfrc522(SS_PIN, RST_PIN);        // Create MFRC522 instance.
 MFRC522::MIFARE_Key key;
 
-int led1 = 8;
-int led2 = 7;
-int led3 = 6;
+int led1 = 2;
+int led2 = 3;
+int led3 = 4;
 int led4 = 5;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);    // inicializacia kniznice (adresa, znaky, riadky)
@@ -200,17 +200,31 @@ void loop() {
   if (tagok == 0) { // faire si carte inconnue
     Serial.print("TAG INCONNU");
   }
+  
   if (tagok > 0) //faire si carte reconnue
   {
 
     Serial.print("TAG OK ");
-    if (sernum[0] == sernum[1]) digitalWrite(led1, HIGH), Serial.print("jus d'orange");
-    if (sernum[0] == sernum[2]) digitalWrite(led2, HIGH), Serial.print("biere");
-    if (sernum[0] == sernum[3])  digitalWrite(led3, HIGH), Serial.print("vin");
-    if (sernum[0] == sernum[4])  digitalWrite(led4, HIGH), Serial.print("eau");
-    if (sernum[0] == sernum[10])
-      delay(2000);
-
+    if (sernum[0] == sernum[1]) {
+      digitalWrite(led1, HIGH); 
+      Serial.print("jus d'orange");
+      delay(5000);
+    }
+    if (sernum[0] == sernum[2]) {
+      digitalWrite(led2, HIGH);
+      Serial.print("biere");
+      delay(5000);
+    }
+    if (sernum[0] == sernum[3]) {
+      digitalWrite(led3, HIGH), 
+      Serial.print("vin");
+      delay(5000);
+    }
+    if (sernum[0] == sernum[4]) {
+      digitalWrite(led4, HIGH);
+      Serial.print("eau");
+      delay(5000);
+    }
   }
 
   if (tagok == 255) //faire si carte master reconnue
